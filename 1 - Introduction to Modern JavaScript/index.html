@@ -97,10 +97,10 @@
 					<section>
 						<h2>An Overview</h2>
 						<ul>
-							<li>Added inline to HTML with the <code>&lt;script&gt;</code> tag.</li>
-							<li>Events attached to controls using attributes. Example: <code>&lt;input type="button" onclick="..."&gt;</code></li>
-							<li>Functions defined in the global context.</li>
-							<li>JavaScript considered a toy language.</li>
+							<li class="fragment">Code is added inline to HTML with the <code>&lt;script&gt;</code> tag.</li>
+							<li class="fragment">Events are attached to controls by embedding JS code into HTML attributes. Example: <code>&lt;input type="button" onclick="doSomething();"&gt;</code></li>
+							<li class="fragment">Functions are typically defined in the global context.</li>
+							<li class="fragment">JavaScript is generally regarded as a toy language.</li>
 						</ul>
 					</section>
 					<section>
@@ -110,19 +110,77 @@
 					<section>
 						<h2>Well...</h2>
 						<ul>
-							<li>The UI and the code are tightly coupled.</li>
-							<li>Naming conflicts and accidental overriding possible in the global context.</li>
-							<li>Difficult to maintain and debug.</li>
-							<li>Unit testing is difficult to impossible.</li>
+							<li class="fragment">The UI and the code are tightly coupled.</li>
+							<li class="fragment">Naming conflicts and accidental overriding is likely in the global context.</li>
+							<li class="fragment">The code is difficult to maintain and debug.</li>
+							<li class="fragment">Unit testing is basically impossible.</li>
 						</ul>
 					</section>
 					<section>
 						<h2>...There's a better way, right?</h2>
-						<img src="images/frontpage.gif" alt="frontpage fail" /><br />
-						Relax, nobody is bringing FrontPage back.
+						<img src="images/frontpage.gif" alt="frontpage fail" width="400
+                        " /><br />
+						(Relax, nobody is bringing FrontPage back...)
 					</section>
 				</section>
-				
+                <section>
+                    <h2>Introducing Modern JS!</h2>
+                    <ul>
+                        <li class="fragment">Better libraries and frameworks.</li>
+                        <li class="fragment">Better tools.</li>
+                        <li class="fragment">More environments for JS to run in.</li>
+                        <li class="fragment">A large and active community of developers.</li>
+                    </ul>
+                </section>
+				<section>
+                    <h2>Libraries and Frameworks</h2>
+                    <ul>
+                        <li>DOM Manipulation: <a href="http://jquery.com">jQuery</a>/<a href="http://zeptojs.com">Zepto</a>, Native DOM API</li>
+                        <li>Array/Collection Manipulation: <a href="http://underscorejs.org">Underscore</a>/<a href="http://lodash.com">Lodash</a></li>
+                        <li>MV* Libraries: <a href="http://backbonejs.org">Backbone</a>, <a href="http://facebook.github.io/react">React</a></li>
+                        <li>MV* Frameworks: <a href="http://angularjs.org">Angular</a>, <a href="http://emberjs.com">Ember</a>, <a href="http://batmanjs.org">Batman</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Linters</h2>
+                    <p>Provides syntax validation and enforces coding guidelines and best practices. Useful for catching syntax errors before runtime.</p>
+                    <ul>
+                        <li><a href="http://jslint.com">JSLint</a>: Relatively strict linter for JS.</li>
+                        <li><a href="http://jshint.com">JSHint</a>: Based on JSLint, more configurable.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Build Systems</h2>
+                    <p>Used to execute steps required to validate, compile, and package your application.</p>
+                    <ul>
+                        <li><a href="">Cake</a></li>
+                        <li><a href="http://gruntjs.com">Grunt</a></li>
+                        <li><a href="http://gulpjs.com">Gulp</a></li>
+                        <li><a href="http://brunch.io">Brunch</a></li>
+                        <li><a href="">Broccoli</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Module Systems and Loaders</h2>
+                    <p>Until ES6 is released, JavaScript doesn't have a built-in module system. In the mean time, you can choose your own.</p>
+                    <ul>
+                        <li>RequireJS (AMD)</li>
+                        <li>Browserify (CommonJS)</li>
+                        <li>Angular Modules</li>
+                        <li>ES6 Modules</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Testing</h2>
+                    <p>Automated unit and integration testing for server-side and client-side environments.</p>
+                    <ul>
+                        <li>Nodeunit (for Node.js)</li>
+                        <li>qUnit</li>
+                        <li>Mocha</li>
+                        <li>Chai</li>
+                        <li>Sinon</li>
+                    </ul>
+                </section>
 				<section>
 					<h2>Heads Up</h2>
 					<p>
