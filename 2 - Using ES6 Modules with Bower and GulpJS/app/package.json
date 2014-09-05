@@ -20,6 +20,9 @@
     "gulp-filter": "~1.0.1",
     "main-bower-files": "~2.0.0",
     "gulp-foreach": "0.0.1",
-    "gulp-flatten": "0.0.2"
+    "gulp-flatten": "0.0.2",
+    "gulp-uglify": "~1.0.1",
+    "gulp-util": "~3.0.1",
+    "gulp-rename": "~1.2.0"
   }
 }
