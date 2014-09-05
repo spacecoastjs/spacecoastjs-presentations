@@ -15,6 +15,13 @@ var bowerFiles = require('main-bower-files'),
 	uglify     = require('gulp-uglify'),
 	util       = require('gulp-util');
 
+// include libraries for serving http content.
+var browserSync = require('browser-sync');
+var http       = require('http'),
+	path       = require('path'),
+	ecstatic   = require('ecstatic');
+
+// build system paths.
 const 	PATH_BOWER     = 'bower_components', // path to our Bower files.
 		PATH_APP       = 'app',
 		PATH_BUILD     = 'build',
@@ -37,13 +44,13 @@ gulp.task('lint', function () {
 });
 
 // Copies html file to the build.
-gulp.task('build-files', ['clean'], function () {
+gulp.task('build-files', function () {
 	return gulp.src('index.html')
 		.pipe(gulp.dest(PATH_BUILD));
 });
 
 // Select and concatenate our runtime dependencies.
-gulp.task('build-runtime', ['clean'], function () {
+gulp.task('build-runtime', function () {
 	return gulp.src(bowerFiles({ env: 'dev-runtime' }), { base: PATH_BOWER })
 		.pipe(sourcemaps.init())
 		.pipe(concat('runtime.js'))
@@ -52,14 +59,14 @@ gulp.task('build-runtime', ['clean'], function () {
 });
 
 // Copy our library dependencies into the /lib folder.
-gulp.task('build-lib', ['clean'], function () {
+gulp.task('build-lib', function () {
 	return gulp.src(bowerFiles({ env: 'dev' }), { base: PATH_BOWER })
 		.pipe(flatten())
 		.pipe(gulp.dest(PATH_BUILD_LIB));
 });
 
 // Transpile our app's ES6 source code into a single JS file.
-gulp.task('build-app', ['clean'], function () {
+gulp.task('build-app', function () {
     return gulp.src(PATH_APP + '/*.js', {base: PATH_APP})
 		.pipe(sourcemaps.init())
 		.pipe(buildApp())
@@ -69,12 +76,12 @@ gulp.task('build-app', ['clean'], function () {
 });
 
 // Runs the entire build.
-gulp.task('build', [
-	'lint', 
-	'build-files', 
+gulp.task('build', ['clean', 'lint'], function () {
+	gulp.run(['build-files', 
 	'build-runtime', 
 	'build-lib', 
 	'build-app']);
+});
 
 // Cleans the packaging directory before running the build.
 gulp.task('package-clean', ['build'], function () {
@@ -119,5 +126,25 @@ gulp.task('package', [
 	'package-lib',
 	'package-app']);
 
-// The default task: build.
-gulp.task('default', ['build']);
+gulp.task('start', function () {
+  /*http.createServer(
+    ecstatic({ root: path.join(__dirname, PATH_BUILD) })
+  ).listen(8080);
+
+  console.log('Listening on :8080');
+  });*/
+	browserSync({
+        server: {
+            baseDir: "./" + PATH_BUILD
+        }
+    });
+	
+	gulp.watch('app/*.js', ['build-app', browserSync.reload]);
+	gulp.watch('index.html', ['build-files', browserSync.reload]);
+});
+
+// The default task: build, then run start.
+gulp.task('default', ['build'], function () {
+	// we don't run to run "start" until "build" is done.
+	gulp.run('start');
+});

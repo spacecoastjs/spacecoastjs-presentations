@@ -23,13 +23,20 @@
     "jquery": "~2.1.1",
     "traceur": "~0.0.58",
     "es6-module-loader": "~0.8.2",
-    "system.js": "~0.8.2"
+    "system.js": "~0.8.2",
+    "lodash": "~2.4.1"
   },
   "overrides": {
     "jquery": {
       "main": {
         "dev": "dist/jquery.js",
         "prod": "dist/jquery.min.js"
+      }
+    },
+    "lodash": {
+      "main": {
+        "dev": "dist/lodash.js",
+        "prod": "dist/lodash.min.js"
       }
     },
     "traceur": {
