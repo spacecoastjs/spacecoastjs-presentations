@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+	<head>
+    <script src="runtime.js"></script>
+    <script src="app.js"></script>
+    <script>
+
+    System.config({
+        baseURL: '/lib'
+    });
+
+    System.import('app/main')
+        .catch(console.error.bind(console)); // we add this since promises suppress all errors.
+
+    </script>
+  	</head>
+	<body>
+	Testing...
+	</body>
+</html>
