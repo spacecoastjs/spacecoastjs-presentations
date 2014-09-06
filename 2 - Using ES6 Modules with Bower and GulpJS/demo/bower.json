@@ -1,0 +1,88 @@
+{
+  "name": "spacecoastjs-presentation-2-demo",
+  "version": "1.0.0",
+  "homepage": "https://github.com/spacecoastjs/spacecoastjs-presentations",
+  "authors": [
+    "Steven Hunt <steven.mtw.hunt@gmail.com>"
+  ],
+  "description": "Demo for Space Coast JS - Presentation 2",
+  "main": "build/app.js",
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "traceur": "~0.0.58",
+    "es6-module-loader": "~0.8.2",
+    "system.js": "~0.8.2",
+    "lodash": "~2.4.1",
+    "backbone": "~1.1.2",
+    "todomvc-common": "~0.1.9",
+    "backbone.localStorage": "~1.1.13"
+  },
+  "overrides": {
+    "jquery": {
+      "main": {
+        "library:dev": "dist/jquery.js",
+        "library:prod": "dist/jquery.min.js"
+      }
+    },
+    "underscore": {
+      "main": {
+        "library:dev": "underscore.js",
+        "library:prod": "underscore-min.js"
+      }
+    },
+    "backbone": {
+      "main": {
+        "library:dev": "backbone.js",
+        "library:prod": "backbone.js"
+      }
+    },
+    "backbone.localStorage": {
+      "main": {
+        "library:dev": "backbone.localStorage.js",
+        "library:prod": "backbone.localStorage-min.js"
+      }
+    },
+    "todomvc-common": {
+      "main": {
+        "resource:dev": ["*"],
+        "resource:prod": ["*"]
+      }
+    },
+    "lodash": {
+      "main": {
+        "library:dev": "dist/lodash.js",
+        "library:prod": "dist/lodash.min.js"
+      }
+    },
+    "traceur": {
+      "main": {
+        "runtime:dev": "traceur.js",
+        "runtime:prod": "traceur.min.js"
+      }
+    },
+    "es6-module-loader": {
+      "main": {
+        "runtime:dev": "dist/es6-module-loader.js",
+        "runtime:prod": "dist/es6-module-loader.min.js"
+      }
+    },
+    "system.js": {
+      "main": {
+        "runtime:dev": "dist/system.js",
+        "runtime:prod": "dist/system.min.js"
+      }
+    }
+  }
+}

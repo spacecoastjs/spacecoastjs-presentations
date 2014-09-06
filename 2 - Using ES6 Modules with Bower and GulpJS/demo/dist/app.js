@@ -1,0 +1,1 @@
+System.register("app/main",["jquery"],function(){"use strict";var e;return{setters:[function(t){e=t.default}],execute:function(){e(function(){e("body").css("background-color","green")})}}});
