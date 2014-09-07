@@ -2,14 +2,16 @@ import Backbone from 'backbone';
 
 import todos from 'app/collections/todo';
 
-// Todo Router
-// ----------
-var TodoRouter = Backbone.Router.extend({
-	routes: {
-		'*filter': 'setFilter'
-	},
+class TodoRouter extends Backbone.Router {
 
-	setFilter: function (param) {
+	constructor() {
+		this.routes = {
+			'*filter': 'setFilter'
+		};
+		super();
+	}
+	
+	setFilter (param) {
 		// Set the current filter to be used
 		this.todoFilter = param || '';
 
@@ -17,7 +19,6 @@ var TodoRouter = Backbone.Router.extend({
 		// of Todo view items
 		todos.trigger('filter');
 	}
-});
+}
 
 export default new TodoRouter();
-Backbone.history.start();

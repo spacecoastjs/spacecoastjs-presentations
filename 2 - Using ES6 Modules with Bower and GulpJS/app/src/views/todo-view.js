@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
-import _ from 'underscore';
 
 import router from 'app/routers/router';
+import templates from 'app/templates';
 
 var 	ENTER_KEY = 13,
 		ESC_KEY   = 27;
@@ -11,35 +11,41 @@ var 	ENTER_KEY = 13,
 // --------------
 
 // The DOM element for a todo item...
-export default Backbone.View.extend({
-	//... is a list tag.
-	tagName:  'li',
+class TodoView extends Backbone.View {
 
-	// Cache the template function for a single item.
-	template: _.template($('#item-template').html()),
+	constructor (options) {
 
-	// The DOM events specific to an item.
-	events: {
-		'click .toggle': 'toggleCompleted',
-		'dblclick label': 'edit',
-		'click .destroy': 'clear',
-		'keypress .edit': 'updateOnEnter',
-		'keydown .edit': 'revertOnEscape',
-		'blur .edit': 'close'
-	},
+		//... is a list tag.
+		this.tagName = 'li';
+
+		// Cache the template function for a single item.
+		this.template = templates.item;
+
+		// The DOM events specific to an item.
+		this.events = {
+			'click .toggle': 'toggleCompleted',
+			'dblclick label': 'edit',
+			'click .destroy': 'clear',
+			'keypress .edit': 'updateOnEnter',
+			'keydown .edit': 'revertOnEscape',
+			'blur .edit': 'close'
+		};
+
+		super(options);
+	}
 
 	// The TodoView listens for changes to its model, re-rendering. Since
 	// there's a one-to-one correspondence between a **Todo** and a
 	// **TodoView** in this app, we set a direct reference on the model for
 	// convenience.
-	initialize: function () {
+	initialize () {
 		this.listenTo(this.model, 'change', this.render);
 		this.listenTo(this.model, 'destroy', this.remove);
 		this.listenTo(this.model, 'visible', this.toggleVisible);
-	},
+	}
 
 	// Re-render the titles of the todo item.
-	render: function () {
+	render () {
 		// Backbone LocalStorage is adding `id` attribute instantly after
 		// creating a model.  This causes our TodoView to render twice. Once
 		// after creating a model and once on `id` change.  We want to
@@ -56,33 +62,33 @@ export default Backbone.View.extend({
 		this.toggleVisible();
 		this.$input = this.$('.edit');
 		return this;
-	},
+	}
 
-	toggleVisible: function () {
+	toggleVisible () {
 		this.$el.toggleClass('hidden', this.isHidden());
-	},
+	}
 
-	isHidden: function () {
+	isHidden () {
 		var isCompleted = this.model.get('completed');
 		return (// hidden cases only
 			(!isCompleted && router.todoFilter === 'completed') ||
 			(isCompleted && router.todoFilter === 'active')
 		);
-	},
+	}
 
 	// Toggle the `"completed"` state of the model.
-	toggleCompleted: function () {
+	toggleCompleted () {
 		this.model.toggle();
-	},
+	}
 
 	// Switch this view into `"editing"` mode, displaying the input field.
-	edit: function () {
+	edit () {
 		this.$el.addClass('editing');
 		this.$input.focus();
-	},
+	}
 
 	// Close the `"editing"` mode, saving changes to the todo.
-	close: function () {
+	close () {
 		var value = this.$input.val();
 		var trimmedValue = value.trim();
 
@@ -110,27 +116,29 @@ export default Backbone.View.extend({
 		}
 
 		this.$el.removeClass('editing');
-	},
+	}
 
 	// If you hit `enter`, we're through editing the item.
-	updateOnEnter: function (e) {
+	updateOnEnter (e) {
 		if (e.which === ENTER_KEY) {
 			this.close();
 		}
-	},
+	}
 
 	// If you're pressing `escape` we revert your change by simply leaving
 	// the `editing` state.
-	revertOnEscape: function (e) {
+	revertOnEscape (e) {
 		if (e.which === ESC_KEY) {
 			this.$el.removeClass('editing');
 			// Also reset the hidden input back to the original value.
 			this.$input.val(this.model.get('title'));
 		}
-	},
+	}
 
 	// Remove the item, destroy the model from *localStorage* and delete its view.
-	clear: function () {
+	clear () {
 		this.model.destroy();
 	}
-});
+}
+
+export default TodoView;
