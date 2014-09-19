@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Space Coast JS - Presentation 1 - Introduction to Modern JavaScript</title>
+
+		<meta name="description" content="An introduction to modern JavaScript.">
+		<meta name="author" content="Steven Hunt">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<link rel="stylesheet" href="css/presentation.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h2>ES6 Modules with Bower and GulpJS</h2>
+					<h4>by <a target="_blank" href="http://stevenhunt.me">Steven Hunt</a></h4>
+					<p>
+						Presented by<br />
+						<a target="_blank" href="http://spacecoastjs.org">Space Coast JS</a><br />
+						<img class="logo" src="https://raw.githubusercontent.com/spacecoastjs/logo.js/master/spacecoastjs/spacecoastjs.png" alt="Space Coast JS logo" /><br />
+					</p>
+					<p>
+						Meeting space provided by<br />
+						<a target="_blank" href="http://trephub.org">TrepHub</a><br />
+						<img class="logo" src="images/trephub.png" alt="Trephub logo" />
+					</p>
+				</section>
+
+				<section>
+					<h2>Welcome!</h2>
+					<p>
+						Happy "Talk like a Pirate" day!
+					</p>
+					<img class="logo" src="images/yarr.jpg" />
+				</section>
+
+				<section>
+					<h2>About Space Coast JS</h2>
+						<img class="logo" src="https://raw.githubusercontent.com/spacecoastjs/logo.js/master/spacecoastjs/spacecoastjs.png" alt="Space Coast JS logo" /><br />
+					<p>
+						Space Coast JS is a community of software developers interested in discussing JavaScript-based technologies. We present information on a wide range of JavaScript-related topics at our meetings such as Node.js, development tools, best practices, etc.
+					</p>
+				</section>
+
+				<section>
+					<h2>About Steven</h2>
+						<img class="logo" src="http://stevenhunt.me/images/steven.png" alt="Steven HUNt" /><br />
+					<p>
+						I’m a software developer specializing in JavaScript, C#, and database systems. I’ve worked on everything from cutting-edge Node.js apps to NASA mainframes.
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>What is ES6?</h2>
+							ES6, also called Harmony, is the next version of JavaScript which adds new syntax and functionality to the language.
+					</section>
+					<section>
+						<h2>What's new with ES6?</h2>
+						Let's explore the new features...
+					</section>
+				</section>
+				<section data-markdown>
+## Block Level Scoping
+Unlike other C-based languages, JavaScript scopes variables by function instead of by block. For example:
+    
+    function isAwesome(user) {
+		if (user == "Steven") {
+			var awesome = true;
+		}
+		return !!awesome;
+	}
+
+With ES6, you can use the `let` keyword to scope a variable to the block it is defined in.
+
+	if (user == "Steven") {
+		let awesome = true;
+	}
+	return !!awesome; // ReferenceError
+
+				</section>
+				<section data-markdown>
+## Default Parameters
+
+Before ES6, if you wanted a default value for a function parameter you had to do this:
+
+	function myFunction (myParam) {
+		myParam = myParam || "default value";
+	}
+
+With ES6, now you can do this:
+
+    function myFunction (myParam = "default value") {
+    }
+
+Unlike default parameter values in some other languages, there is no requirement that the value be a constant.
+
+				</section>
+				<section data-markdown>
+## Lambda Expressions
+
+If you know C# syntax for lambdas, then you know this:
+
+	$(() => {
+		let data = [1,2,4,5,6,7,8,9];
+	
+		let multiplesOfTwo = _(data)
+			.filter(i => i % 2 === 0);
+	});
+
+Something else about lambdas is that they bind the value of `this` to the parent function scope automatically, so no more `that` or `self` variables required! Example:
+
+	function MyClass (val, wait) {
+		setTimeout(() => {
+			this.value = val; // NOT set to the window object :)
+		}, wait);
+	}
+
+				</section>
+				<section>
+					<section data-markdown>
+## The "Triple Dot" Operator
+
+It has several uses in ES6:
+
++ The "Rest" operator
++ The "Spread" operator
+
+					</section>
+					<section data-markdown>
+## Rest Operator
+
+Used as the last parameter of a function to capture the "rest" of the parameters:
+
+    function myFunc (param1, ...theRest) {
+        // code...
+    }
+
+Unlike the `arguments` value, the "rest" operator produces a true array instead of an "array-like" object.	
+
+					</section>
+					<section data-markdown>
+## Spread Operator
+
+Used as a language-defined version of `Function.apply`:
+
+    function sumOfThree (val1, val2, val3) {
+        return val1 + val2 + val3;
+    }
+    
+    let result = sumOfThree(...[1, 2, 3]);
+
+					</section>
+				</section>
+				<section data-markdown>
+## Classes!
+
+It's been a long time coming, but JavaScript is finally getting the `class` keyword! You could implement "classes" before and use JavaScript's prototype inheritance model, but it was difficult for programmers more used to langauges like Java.
+
+				</section>
+				<section data-markdown>
+
+## What does it look like?
+
+    class Car extends MotorVehicle {
+        
+        constructor (options) {
+            this.areHeadlightsOn = options.areHeadlightsOn;
+            super(options);
+        }
+        
+        start () {
+            ...
+        }
+        
+        drive () {
+            ...
+        }
+    }
+				</section>
+				<section>
+					<h2>Breaking it down</h2>
+						<ul>
+							<li class="fragment">First off, we have a syntax convention (a keyword even!) for constructors!</li>
+							<li class="fragment">Also, we have a way of reliably calling the parent constructor with the <code>super</code> keyword!</li>
+							<li class="fragment">Finally, we have a clean instance method syntax which is free of excessive commas.</li>
+						</ul>
+
+				</section>
+				<section data-markdown>
+## Generator Functions
+
+This new feature of JavaScript allows you to write functions which return values before the function has completed. While it is intended for sequences, this can also be used to replace callbacks.
+
+    function* powersOfTwo() {
+        var i = 2;
+        while (true) {
+            yield i;
+            i = i * 2;
+        }
+    }
+    
+    var pow = powersOfTwo();
+    pow.next(); // 2
+    pow.next(); // 4
+    pow.next(); // 8
+    pow.next(); // 16...            
+				</section>
+				<section data-markdown>
+## Generator Functions - Continued
+
+Notice how the code inside of `powersOfTwo` won't continue executing until the next() function is called against the generator object returned. This allows you to write functions which can "pause" and then "resume" based on the actions of the caller.	
+				</section>
+				<section data-markdown>
+## When can I use ES6?
+It depends...
+
+You'll have to wait until at least 2015 to use it natively in a browser.
+
+If you can't wait, you can use a transpiler like [Google's Traceur](https://github.com/google/traceur-compiler).
+				</section>
+				<section data-markdown>
+					# Live Demo
+
+					+ ES6 modules and other features.
+					+ Use it today!
+				</section>
+				<section>
+					<h2>Thanks for coming!</h2>
+					<br /><br />
+					<em>Questions?<br />Comments?</em>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

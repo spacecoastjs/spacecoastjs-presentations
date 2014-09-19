@@ -1,0 +1,21 @@
+<html lang="en" data-framework="backbonejs">
+    <head>
+        <meta charset="utf-8">
+        <title>Backbone.js + ES6 Modules • TodoMVC</title>
+        <link rel="stylesheet" href="resources/todomvc-common/base.css">
+        <script src="runtime.js"></script>
+        <script src="templates.js"></script>
+        <script src="app.js"></script>
+        <script>
+            // force module lookup path to our lib folder.
+            System.config({
+                baseURL: '/lib'
+            });
+            // entry point for the application.
+            System.import('app/main')
+                .catch(console.error.bind(console)); // we add this since promises suppress all errors.
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
