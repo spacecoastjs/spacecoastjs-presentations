@@ -215,9 +215,10 @@ It's been a long time coming, but JavaScript is finally getting the `class` keyw
 				<section>
 					<h2>Breaking it down</h2>
 						<ul>
-							<li class="fragment">First off, we have a syntax convention (a keyword even!) for constructors!</li>
-							<li class="fragment">Also, we have a way of reliably calling the parent constructor with the <code>super</code> keyword!</li>
-							<li class="fragment">Finally, we have a clean instance method syntax which is free of excessive commas.</li>
+							<li class="fragment">The <code>extends</code> keyword should make more people confused between JS and Java than ever before!</li>
+							<li class="fragment">A syntax convention (a keyword even!) for constructors!</li>
+							<li class="fragment">A way of reliably calling the parent constructor with the <code>super</code> keyword!</li>
+							<li class="fragment">A clean instance method syntax which is free of excessive commas.</li>
 						</ul>
 
 				</section>
@@ -244,6 +245,42 @@ This new feature of JavaScript allows you to write functions which return values
 ## Generator Functions - Continued
 
 Notice how the code inside of `powersOfTwo` won't continue executing until the next() function is called against the generator object returned. This allows you to write functions which can "pause" and then "resume" based on the actions of the caller.	
+				</section>				
+				<section data-markdown>
+## Destructuring
+
+Given an array or object, you can "destructure" it and extract specific indexes or fields in a single line of code!
+
+*For arrays:*
+
+	var numbers = [1, 2, 3, 4, 5];
+	var [one, two, , four] = numbers;
+
+*For objects:*
+
+	var obj = { prop1: "one", prop2: "two", prop3: "three" };
+	var { prop1, prop3 } = obj;
+
+				</section>				
+				<section data-markdown>
+## ... and of course: Modules
+
+Before ES6, there were many different module systems to choose from, which was kind of a pain.
+				</section>				
+				<section data-markdown>
+
+## Creating Modules
+
+	export default function myUtilityFunction (val1, ...otherStuff) {
+		// code goes here.
+	}
+
+## Using Modules
+
+	import util from './myUtilityFunction';
+
+	util(1, 2, 3, 4, 5, 6);
+
 				</section>
 				<section data-markdown>
 ## When can I use ES6?
