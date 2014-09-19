@@ -46,7 +46,7 @@
 			<div class="slides">
 
 				<section>
-					<h2>Introduction to Modern JavaScript</h2>
+					<h2>ES6 Modules with Bower and GulpJS</h2>
 					<h4>by <a target="_blank" href="http://stevenhunt.me">Steven Hunt</a></h4>
 					<p>
 						Presented by<br />
@@ -63,8 +63,9 @@
 				<section>
 					<h2>Welcome!</h2>
 					<p>
-						First off, welcome to our very first user group meeting!
+						Happy "Talk like a Pirate" day!
 					</p>
+					<img class="logo" src="images/yarr.jpg" />
 				</section>
 
 				<section>
@@ -85,171 +86,179 @@
 
 				<section>
 					<section>
-						<h2>Before we talk about "Modern" JavaScript...
+						<h2>What is ES6?</h2>
+							ES6, also called Harmony, is the next version of JavaScript which adds new syntax and functionality to the language.
 					</section>
 					<section>
-						<h2>Let's talk about "Classic" JavaScript.</h2>
-						<img src="images/what-if-I-told-you-semi-colons-js.jpg" alt="What if I told you / semicolons on javascript are optional" /><br />
-						Just because you <i>can</i>, doesn't mean that you should.
+						<h2>What's new with ES6?</h2>
+						Let's explore the new features...
 					</section>
 				</section>
+				<section data-markdown>
+## Block Level Scoping
+Unlike other C-based languages, JavaScript scopes variables by function instead of by block. For example:
+    
+    function isAwesome(user) {
+		if (user == "Steven") {
+			var awesome = true;
+		}
+		return !!awesome;
+	}
+
+With ES6, you can use the `let` keyword to scope a variable to the block it is defined in.
+
+	if (user == "Steven") {
+		let awesome = true;
+	}
+	return !!awesome; // ReferenceError
+
+				</section>
+				<section data-markdown>
+## Default Parameters
+
+Before ES6, if you wanted a default value for a function parameter you had to do this:
+
+	function myFunction (myParam) {
+		myParam = myParam || "default value";
+	}
+
+With ES6, now you can do this:
+
+    function myFunction (myParam = "default value") {
+    }
+
+Unlike default parameter values in some other languages, there is no requirement that the value be a constant.
+
+				</section>
+				<section data-markdown>
+## Lambda Expressions
+
+If you know C# syntax for lambdas, then you know this:
+
+	$(() => {
+		let data = [1,2,4,5,6,7,8,9];
+	
+		let multiplesOfTwo = _(data)
+			.filter(i => i % 2 === 0);
+	});
+
+Something else about lambdas is that they bind the value of `this` to the parent function scope automatically, so no more `that` or `self` variables required! Example:
+
+	function MyClass (val, wait) {
+		setTimeout(() => {
+			this.value = val; // NOT set to the window object :)
+		}, wait);
+	}
+
+				</section>
 				<section>
-					<section>
-						<h2>An Overview</h2>
-						<ul>
-							<li class="fragment">Code is added inline to HTML with the <code>&lt;script&gt;</code> tag.</li>
-							<li class="fragment">Events are attached to controls by embedding JS code into HTML attributes. Example: <code>&lt;input type="button" onclick="doSomething();"&gt;</code></li>
-							<li class="fragment">Functions are typically defined in the global context.</li>
-							<li class="fragment">JavaScript is generally regarded as a toy language.</li>
-						</ul>
+					<section data-markdown>
+## The "Triple Dot" Operator
+
+It has several uses in ES6:
+
++ The "Rest" operator
++ The "Spread" operator
+
 					</section>
-					<section>
-						<h2>What's so bad about that?</h2>
-						<img src="images/javascript-everywhere.jpg" alt="javascript everywhere" />
+					<section data-markdown>
+## Rest Operator
+
+Used as the last parameter of a function to capture the "rest" of the parameters:
+
+    function myFunc (param1, ...theRest) {
+        // code...
+    }
+
+Unlike the `arguments` value, the "rest" operator produces a true array instead of an "array-like" object.	
+
 					</section>
-					<section>
-						<h2>Well...</h2>
-						<ul>
-							<li class="fragment">The UI and the code are tightly coupled.</li>
-							<li class="fragment">Naming conflicts and unintended overriding are likely in the global context.</li>
-							<li class="fragment">The code is difficult to maintain and debug.</li>
-							<li class="fragment">Automated testing and validation is difficult.</li>
-						</ul>
-					</section>
-					<section>
-						<h2>...There's a better way, right?</h2>
-						<img src="images/frontpage.gif" alt="frontpage fail" width="400
-                        " /><br />
-						(Relax, nobody is bringing FrontPage back...)
+					<section data-markdown>
+## Spread Operator
+
+Used as a language-defined version of `Function.apply`:
+
+    function sumOfThree (val1, val2, val3) {
+        return val1 + val2 + val3;
+    }
+    
+    let result = sumOfThree(...[1, 2, 3]);
+
 					</section>
 				</section>
-                <section>
-                    <h2>Introducing Modern JS!</h2>
-                    <ul>
-                        <li class="fragment">Better libraries and frameworks.</li>
-                        <li class="fragment">Better tools.</li>
-                        <li class="fragment">More environments for JS to run in.</li>
-                        <li class="fragment">A large and active community of developers.</li>
-                    </ul>
-                </section>
-				<section>
-                    <h2>Libraries and Frameworks</h2>
-                    <ul>
-                        <li>DOM Manipulation: <a href="http://jquery.com">jQuery</a>/<a href="http://zeptojs.com">Zepto</a>, Native DOM API</li>
-						<li>UI Components: <a href="http://http://getbootstrap.com">Bootstrap</a>, <a href="http://jqueryui.com">jQuery UI</a>
-                        <li>Array/Collection Manipulation: <a href="http://underscorejs.org">Underscore</a>/<a href="http://lodash.com">Lodash</a></li>
-                        <li>MV* Libraries: <a href="http://backbonejs.org">Backbone</a>, <a href="http://www.ractivejs.org/">Ractive</a></li>
-                        <li>MV* Frameworks: <a href="http://angularjs.org">Angular</a>, <a href="http://emberjs.com">Ember</a>, <a href="http://batmanjs.org">Batman</a>, <a href="http://facebook.github.io/react">React</a></li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Module Systems and Loaders</h2>
-                    <p>Until ES6 is released, JavaScript doesn't have a built-in module system. In the mean time, you can choose your own.</p>
-                    <ul>
-                        <li><a href="https://github.com/amdjs/amdjs-api/blob/master/AMD.md">AMD</a> (<a href="http://requirejs.org/">RequireJS</a>)</li>
-                        <li><a href="http://wiki.commonjs.org/wiki/Modules">CommonJS</a> (<a href="http://nodejs.org/api/modules.html">Node.js</a>, <a href="http://browserify.org/">Browserify</a>)</li>
-                        <li><a href="https://docs.angularjs.org/guide/module">Angular Modules</a></li>
-                        <li><a href="http://jsmodules.io/">ES6 Modules</a></li>
-                        <li><a href="https://typescript.codeplex.com/wikipage?title=Modules%20in%20TypeScript">TypeScript Modules</a></li>
-                    </ul>
-                </section>
-				<section>
-					<section>
-						<h2>Editors</h2>
-						<ul>
-							<li><a href="http://jetbrains.com/webstorm">JetBrains WebStorm</a> (Paid)</li>
-							<li><a href="http://sublimetext.com">SublimeText</a> (Paid)</li>
-							<li><a href="http://atom.io">Atom</a> (Free)</li>
-							<li><a href="http://brackets.io">Brackets</a> (Free)</li>
-							<li><a href="http://aptana.com">Aptana</a> (Free)</li>
-							<li>Free Online Editors (<a href="http://jsfiddle.net">JSFiddle</a>, <a href="http://codepen.io">Codepen</a>, <a href="http://jsbin.com">JSBin</a>)</li>
-							<li>...really any text editor you want!</li>
-						</ul>
-					</section>
-					<section>
-						<h2>Don't forget about the classics!</h2>
-						<img src="images/atom.png" alt="VIM EMACS ATOM" />
-					</section>
+				<section data-markdown>
+## Classes!
+
+It's been a long time coming, but JavaScript is finally getting the `class` keyword! You could implement "classes" before and use JavaScript's prototype inheritance model, but it was difficult for programmers more used to langauges like Java.
+
 				</section>
-                <section>
-                    <h2>Linters</h2>
-                    <p>Provides syntax validation and enforces coding guidelines and best practices. Useful for catching syntax errors before runtime.</p>
-                    <ul>
-                        <li><a href="http://jslint.com">JSLint</a>: The original JS linter.</li>
-                        <li><a href="http://jshint.com">JSHint</a>: Based on JSLint, more configurable.</li>
-                       <li><a href="http://eslint.org/">ESLint</a>: A modular JS linting utility.</li>
-                       <li><a href="https://github.com/jscs-dev/node-jscs">JSCS</a>: JavaScript coding style validator.</li>
-                       <li><a href="http://coffeelint.org">CoffeeLint</a>: A linter for CoffeeScript.</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Build Systems</h2>
-                    <p>Used to execute steps required to validate, compile, and package your application.</p>
-                    <ul>
-                        <li><a href="http://coffeescript.org/documentation/docs/cake.html">Cake</a>: A simple build system for CoffeeScript.</li>
-                        <li><a href="http://gruntjs.com">Grunt</a>: A popular build system which uses JS for the build file.</li>
-                        <li><a href="http://gulpjs.com">Gulp</a>: A new and fancy build system based on streaming pipes.</li>
-                        <li><a href="http://brunch.io">Brunch</a>: A scaffolding and build tool that is pre-configured.</li>
-                        <li><a href="https://github.com/broccolijs/broccoli">Broccoli</a>: An even newer and fancier build system based on even fancier streams/pipes/fibers/whatever.</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Transpilers</h2>
-                    <p>A <em>Transpiler</em>, or <a>source-to-source compiler</a>, allows code to be converted into another source language such as JavaScript.</p>
-                    <ul>
-                        <li><a href="https://github.com/google/traceur-compiler">Traceur</a>: ECMAScript 6 (Harmony)</li>
-                        <li><a href="http://coffeescript.org">CoffeeScript</a>: A Ruby-like language.</li>
-                        <li><a href="http://www.typescriptlang.org/">TypeScript</a>: ES6 + type safety.</li>
-                        <li><a href="https://www.dartlang.org/">Dart</a>: a class-based object, oriented language by Google.</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Debugging Tools</h2>
-                    <ul>
-                        <li>Native (<a href="https://developer.chrome.com/devtools">Chrome</a>, <a href="http://getfirebug.com/">Firefox</a>, <a href="http://msdn.microsoft.com/en-us/library/ie/bg182326(v=vs.85).aspx">IE</a>, <a href="http://www.opera.com/dragonfly/">Opera</a>, <a href="https://developer.apple.com/safari/tools/">Safari</a>)</li>
-                        <li><a href="http://blog.jetbrains.com/webstorm/2014/04/spy-js-webstorm-secret-service/">Spy js</a> for WebStorm</li>
-                        <li><a href="http://blog.brackets.io/2013/08/28/theseus-javascript-debugger-for-chrome-and-nodejs/">Theseus</a></li>
-                        <li><a href="http://sokolovstas.github.io/SublimeWebInspector/">Sublime Web Inspector</a></li>
-                        <li><a href="https://github.com/node-inspector/node-inspector">Node-Inspector</a> (for Node.js)</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Testing</h2>
-                    <p>Automated unit and integration testing for server-side and client-side environments.</p>
-                    <ul>
-                        <li><a href="https://github.com/caolan/nodeunit">NodeUnit</a>: Focused on unit testing for Node.js</li>
-                        <li><a href="http://qunitjs.com/">QUnit</a>: Focused on unit testing for a browser environment.</li>
-                        <li><a href="http://visionmedia.github.io/mocha/">Mocha</a>/<a href="http://chaijs.com/">Chai</a>/<a href="http://sinonjs.org/">Sinon</a>: TDD/BDD toolset with mocks for JS.</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Node.js</h2>
-                    <h4>JS on your server!</h4>
-                    <ul>
-                        <li>Created in 2009 at Joyent using Google's V8 engine.</li>
-                        <li>All requests execute on a single thread, with all IO being asynchronous and evented (I.E. callbacks).</li>
-                        <li>Support for command-line programs to be written in JavaScript. Many of the JS development tools are written in this way.</li>
-                        <li>Ships with the package manager <a href="http://npmjs.org">NPM</a>.</li>
-                        <li>Write your server-side code in the same language as your client-side code!</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Package Managers</h2>
-                    <p>Now that we have so many awesome libaries, how do we manage all of those third-part assets?</p>
-                    <ul>
-                        <li><a href="http://npmjs.org">NPM</a></li>
-                        <li><a href="http://bower.io/">Bower</a></li>
-                        <li><a href="http://jamjs.org/">Jam</a></li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Conclusion</h2>
-                    <ul>
-                        <li>JavaScript is a real language, so treat it like one.</li>
-                        <li>Use JS tools and best practices in your projects.</li>
-                        <li>Go forth and do awesome things!</li>
-                    </ul>
-                </section>
+				<section data-markdown>
+
+## What does it look like?
+
+    class Car extends MotorVehicle {
+        
+        constructor (options) {
+            this.areHeadlightsOn = options.areHeadlightsOn;
+            super(options);
+        }
+        
+        start () {
+            ...
+        }
+        
+        drive () {
+            ...
+        }
+    }
+				</section>
+				<section>
+					<h2>Breaking it down</h2>
+						<ul>
+							<li class="fragment">First off, we have a syntax convention (a keyword even!) for constructors!</li>
+							<li class="fragment">Also, we have a way of reliably calling the parent constructor with the <code>super</code> keyword!</li>
+							<li class="fragment">Finally, we have a clean instance method syntax which is free of excessive commas.</li>
+						</ul>
+
+				</section>
+				<section data-markdown>
+## Generator Functions
+
+This new feature of JavaScript allows you to write functions which return values before the function has completed. While it is intended for sequences, this can also be used to replace callbacks.
+
+    function* powersOfTwo() {
+        var i = 2;
+        while (true) {
+            yield i;
+            i = i * 2;
+        }
+    }
+    
+    var pow = powersOfTwo();
+    pow.next(); // 2
+    pow.next(); // 4
+    pow.next(); // 8
+    pow.next(); // 16...            
+				</section>
+				<section data-markdown>
+## Generator Functions - Continued
+
+Notice how the code inside of `powersOfTwo` won't continue executing until the next() function is called against the generator object returned. This allows you to write functions which can "pause" and then "resume" based on the actions of the caller.	
+				</section>
+				<section data-markdown>
+## When can I use ES6?
+It depends...
+
+You'll have to wait until at least 2015 to use it natively in a browser.
+
+If you can't wait, you can use a transpiler like [Google's Traceur](https://github.com/google/traceur-compiler).
+				</section>
+				<section data-markdown>
+					# Live Demo
+
+					+ ES6 modules and other features.
+					+ Use it today!
+				</section>
 				<section>
 					<h2>Thanks for coming!</h2>
 					<br /><br />

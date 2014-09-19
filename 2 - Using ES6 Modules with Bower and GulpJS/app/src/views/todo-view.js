@@ -14,7 +14,6 @@ var 	ENTER_KEY = 13,
 class TodoView extends Backbone.View {
 
 	constructor (options) {
-
 		//... is a list tag.
 		this.tagName = 'li';
 
