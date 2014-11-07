@@ -4,14 +4,18 @@
 	</head>
 	<body>
 		<div class="calculator">
-			<div class="row">
-				<div class="button">1</div>
-				<div class="button">1</div>
-				<div class="button">1</div>
-			</div>
+			<input type="number" id="nbrValue1" />
+			<select id="ddlOperator">
+				<option value="add">+</option>
+				<option value="subtract">-</option>
+				<option value="multiply">*</option>
+				<option value="divide">-</option>
+			</select>
+			<input type="number" id="nbrValue2" />
+			<button id="btnEquals">=</button>
+			<span id="lblResult"></span>
 		</div>
 	</body>
-	<script type="text/javascript" src="/lib/jquery-2.1.1.js"></script>
-	<script type="text/javascript" src="/build/calculator.js"></script>
-	<script type="text/javascript" src="/build/ui.js"></script>
+	<script type="text/javascript" src="calculator.js"></script>
+	<script type="text/javascript" src="ui.js"></script>
 </html>
