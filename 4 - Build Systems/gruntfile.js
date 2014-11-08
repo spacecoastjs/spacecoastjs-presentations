@@ -15,4 +15,7 @@ module.exports = function (grunt) {
     
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
+
+    grunt.registerTask('build', ['jshint', 'concat']);
+    grunt.registerTask('default', ['build']);
 };

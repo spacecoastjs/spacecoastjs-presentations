@@ -21,4 +21,4 @@ document.getElementById('btnEquals').addEventListener('click', function () {
 	// show it on the screen.
 	$lblResult.innerHTML = result;
 
-}, false)
+}, false);

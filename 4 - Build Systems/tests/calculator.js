@@ -1,5 +1,5 @@
 
-var calc = require('../build/calculator');
+var calc = require('../src/calculator');
 
 exports["Addition Test"] = function (test) {
 
@@ -12,6 +12,7 @@ exports["Addition Test"] = function (test) {
 
 	// Assert
 	test.equals(expected, result, "Addition result is incorrect.");
+	test.done();
 };
 
 exports["Subtraction Test"] = function (test) {
@@ -25,6 +26,7 @@ exports["Subtraction Test"] = function (test) {
 
 	// Assert
 	test.equals(expected, result, "Subtraction result is incorrect.");
+	test.done();
 };
 
 exports["Multiplication Test"] = function (test) {
@@ -38,6 +40,7 @@ exports["Multiplication Test"] = function (test) {
 
 	// Assert
 	test.equals(expected, result, "Multiplication result is incorrect.");
+	test.done();
 };
 
 exports["Division Test"] = function (test) {
@@ -51,4 +54,5 @@ exports["Division Test"] = function (test) {
 
 	// Assert
 	test.equals(expected, result, "Division result is incorrect.");
+	test.done();
 };
